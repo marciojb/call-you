@@ -1,16 +1,33 @@
-document.getElementById("meuBotao").addEventListener("click", function() {
-    const imagem = document.querySelector(".imagem");
-    const input = document.querySelector(".input");
+document.getElementById("test").addEventListener("click", function(event) {
+    event.preventDefault();
+    const imagem = document.querySelector(".mover");
+    const input = document.querySelector(".esconder");
+    const input2fa = document.querySelector(".esconder2fa");
+    var elemento = document.getElementById("meuElemento");
+    elemento.style.visibility = "visible";
+    elemento.style.pointerEvents = "auto"; 
 
-    // Remove a classe que aciona a animação de movimento da imagem
-    imagem.classList.remove("imagem");
-
-    // Remove a classe que aciona a animação de esconder o input
-    input.classList.remove("input");
-
-    // Adiciona as classes novamente para reiniciar a animação
-    setTimeout(function() {
-        imagem.classList.add("imagem");
-        input.classList.add("input");
-    }, 10); // Pequeno atraso para reativar as animações
+    // Remove a propriedade 'animation: none;' para ativar as animações
+    imagem.style.animation = "moverImagem 1s linear forwards";
+    input.style.animation = "esconderInput 1s linear forwards" ;
+    input2fa.style.animation = "esconderInput 1s linear forwards";
+    
 });
+
+document.getElementById("meuBotao").addEventListener("click", function(event) {
+    event.preventDefault();
+    const imagem = document.querySelector(".mover");
+    const input = document.querySelector(".esconder");
+    const inputsenha = document.querySelector(".escondersenha");
+    var elemento = document.getElementById("meuElemento");
+    elemento.style.visibility = "visible";
+    elemento.style.pointerEvents = "auto"; 
+
+    
+
+    // Remove a propriedade 'animation: none;' para ativar as animações
+    imagem.style.animation = "moverImagem 1s linear forwards";
+    input.style.animation = "esconderInput 1s linear forwards";
+    inputsenha.style.animation = "esconderInput 1s linear forwards";
+});
+
