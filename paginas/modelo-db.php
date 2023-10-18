@@ -18,7 +18,7 @@
   <!-- carrocel -------------------------->
   <main>
     <div class="container">
-        <img  id="modelo_db" src="../img/relational-data-model.png" alt="">
+        <img  id="modelo_db" src="../img/modelo de banco.png" alt="">
     </div>
 
   </main>

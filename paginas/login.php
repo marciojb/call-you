@@ -27,7 +27,7 @@
           <input type="text" id="password" type="password"><br>
           <a id="test" href="">Esqueci minha senha</a><br><br><br>
 
-          <button id="meuBotao" class="buttonEntrar" type="submit">Entrar</button><br>
+          <button id="meuBotao" class="buttonEntrar gerarPergunta"  type="submit">Entrar</button><br>
           <a href="cadastro.php">Não possuo cadastro</a><br>
         </form>
       </div>
@@ -46,6 +46,7 @@
             </div>
             <div id="fa" class="esconder2fa">
             <h2>2fa</h2><br><br>
+            <p id="pergunta"></p>
             <label for="">qual e a resposta ? </label>
             <input type="text">
             <button id="buttonSenha">comfimar</button>

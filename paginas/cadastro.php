@@ -50,7 +50,7 @@
 
         <div class="div_input">
           <label class="label" for="cep">CEP:</label>
-          <input class="input_1" type="text" id="cep" name="cep"><br>
+          <input class="input_1" type="text" id="cep" name="cep" oninput="pesquisacep(this.value)"><br>
         </div>
 
         <div class="div_input">
@@ -111,7 +111,7 @@
       </div><br> <br>
 
       <div id="div_botao">
-        <input class="botao" type="submit" value="Cadastra">
+        <input class="botao" type="submit" value=" Cadastra">
         <input class="botao" type="submit" value="Limpa cadastro">
       </div>
     </div>
@@ -119,7 +119,7 @@
 
   <!-- footer-->
   <?php require_once '../componentes/footer.php'; ?>
-
+  <script src="../script/script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 </body>

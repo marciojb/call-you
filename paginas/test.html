@@ -1,75 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <style>
-      .imagem {
-    
-    left: -100px; /* Inicialmente, a imagem estará fora da tela à esquerda */
-    animation: none; /* A animação está pausada por padrão */
-}
-
-@keyframes moverImagem {
-    0% {
-        left: 10px;
-    }
-    100% {
-        left: calc(10px); /* A imagem se moverá para fora da tela à direita */
-    }
-}
-
-.input {
-    opacity: 1; /* Inicialmente, o campo de entrada é visível */
-    animation: none; /* A animação está pausada por padrão */
-}
-
-@keyframes esconderInput {
-    0% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0; /* O campo de entrada ficará invisível */
-    }
-}
-
-
-
-@keyframes moverImagem {
-    0% {
-        left: -100px;
-    }
-    100% {
-        left: calc(100% + -100px); /* A imagem se moverá para fora da tela à direita */
-    }
-    }
-
-.input {
-    opacity: 1; /* Inicialmente, o campo de entrada é visível */
-}
-
-    </style>
+    <title>Perguntas Aleatórias</title>
 </head>
-
 <body>
-    
-    <input type="text" id="meuInput" class="input">
-    <img src="caminho-da-imagem/imagem.jpg" alt="Minha Imagem" class="imagem">
-    <a href="#" id="meuLink">Iniciar Animação</a>
-    
-    <script >
-      document.getElementById("meuLink").addEventListener("click", function(event) {
-    event.preventDefault(); // Impede a ação padrão do link (recarregar a página)
+    <h1>Perguntas Aleatórias</h1>
+    <p id="pergunta"></p>
+    <button class="gerarPerguntas">Gerar Pergunta</button> <!-- Alterado o texto do botão -->
 
-    const imagem = document.querySelector(".imagem");
-    const input = document.querySelector(".input");
+    <script>
+        const perguntas = [
+            "Qual é a capital da França?",
+            "Quem escreveu a peça 'Romeu e Julieta'?",
+            "Quanto é 2 + 2?"
+        ];
 
-    // Remove a propriedade 'animation: none;' para ativar as animações
-    imagem.style.animation = "moverImagem 4s linear forwards";
-    input.style.animation = "esconderInput 4s linear forwards";
-});
+        const paragrafoPergunta = document.getElementById("pergunta"); // Alterado o ID para "pergunta"
+        const botaoGerarPergunta = document.querySelector(".gerarPerguntas"); // Alterado o texto do botão
+        let perguntaAtual = -1; // Inicializa o índice da pergunta
 
-
-
-
+        botaoGerarPergunta.addEventListener("click", function() {
+            perguntaAtual = (perguntaAtual + 1) % perguntas.length;
+            paragrafoPergunta.textContent = perguntas[perguntaAtual];
+        });
     </script>
 </body>
 </html>
