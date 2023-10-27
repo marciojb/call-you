@@ -1,3 +1,5 @@
+<!-- cadastro bd-->
+<?php   require_once '../rotas\cadastrobd.php'; ?> 
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,7 +17,7 @@
   <!-- header-->
   <?php require_once '../componentes/header.php'; ?>
 
-  <form class="formulario">
+  <form class="formulario" action="cadastro.php" method="post">
     <div class="titulo"><br>
       <h1 class="texto-titulo">CADASTRO</h1>
     </div><br>
@@ -111,7 +113,7 @@
       </div><br> <br>
 
       <div id="div_botao">
-        <input class="botao" type="submit" value=" Cadastra">
+        <input class="botao" type="submit" name="submit" value="Cadastra">
         <input class="botao" type="submit" value="Limpa cadastro">
       </div>
     </div>
