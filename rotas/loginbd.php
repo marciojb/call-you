@@ -1,41 +1,54 @@
-<?php   
+<?php
+header('Content-Type: application/json');
+include_once('../config/config.php');
 if (isset($_POST['login']) && isset($_POST['senha'])) {
-    var_dump($_POST);
-    include_once('../config/config.php');
-    
+    // Inclua o arquivo de configuração
+   
+
+    // Obtém as credenciais do usuário e evita injeção de SQL
     $login = mysqli_real_escape_string($conexao, $_POST['login']);
     $senha = mysqli_real_escape_string($conexao, $_POST['senha']);
-    
+
+    // Consulta SQL preparada
     $query = "SELECT * FROM usuario WHERE login = ? AND senha = ?";
     
-    // Preparar a declaração
-    if ($stmt = mysqli_prepare($conexao, $query)) {
-        // Vincular os parâmetros
-        mysqli_stmt_bind_param($stmt, "ss", $login, $senha);
-        
-        // Executar a consulta
-        mysqli_stmt_execute($stmt);
-        
-        // Obter os resultados
-        $result = mysqli_stmt_get_result($stmt);
-        
-        if ($result && mysqli_num_rows($result) > 0) {
-            // Credenciais corretas, o usuário está autenticado.
-            echo "Login bem-sucedido";
+    // Prepara a consulta
+    $stmt = $conexao->prepare($query);
+
+    if ($stmt) {
+        // Vincula os parâmetros
+        $stmt->bind_param("ss", $login, $senha);
+
+        // Executa a consulta
+        $stmt->execute();
+
+        // Obtém o resultado da consulta
+        $result = $stmt->get_result();
+
+        // Verifica se a consulta retornou alguma linha (ou seja, se as credenciais são válidas)
+        if ($result->num_rows > 0) {
+            $response = array('success' => true, 'message' => 'Login bem-sucedido');
         } else {
-            // Credenciais incorretas, o usuário não está autenticado.
-            echo "Credenciais inválidas";
+            $response = array('success' => false, 'message' => 'Credenciais inválidas');
         }
-        
-        // Fechar a declaração
-        mysqli_stmt_close($stmt);
+
+        // Fecha a consulta
+        $stmt->close();
     } else {
-        // Tratamento de erro
-        echo "Erro na preparação da consulta: " . mysqli_error($conexao);
+        $response = array('success' => false, 'message' => 'Erro na consulta preparada');
     }
     
-    // Feche a conexão com o banco de dados
-    mysqli_close($conexao);
+    // Fecha a conexão com o banco de dados
+    $conexao->close();
 } else {
-    echo "Dados de login não foram enviados corretamente.";
+    // Caso as credenciais não tenham sido fornecidas na solicitação
+    $response = array('success' => false, 'message' => 'Credenciais não fornecidas');
 }
+
+// Retorna a resposta em JSON
+echo json_encode($response);
+
+
+?>
+
+
