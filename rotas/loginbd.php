@@ -1,54 +1,73 @@
 <?php
-header('Content-Type: application/json');
 include_once('../config/config.php');
-if (isset($_POST['login']) && isset($_POST['senha'])) {
-    // Inclua o arquivo de configuração
-   
+// Verifique se a solicitação é um POST
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Inicialize o array de resposta
+    $response = array();
 
-    // Obtém as credenciais do usuário e evita injeção de SQL
-    $login = mysqli_real_escape_string($conexao, $_POST['login']);
-    $senha = mysqli_real_escape_string($conexao, $_POST['senha']);
+    // Obtém o corpo da solicitação POST como um objeto JSON
+    $json_data = file_get_contents('php://input');
+    $data = json_decode($json_data, true);
 
-    // Consulta SQL preparada
-    $query = "SELECT * FROM usuario WHERE login = ? AND senha = ?";
-    
-    // Prepara a consulta
-    $stmt = $conexao->prepare($query);
+    // Verifica se o JSON foi decodificado com sucesso
+    if ($data !== null) {
+        // Obtém as credenciais do usuário a partir do objeto JSON
+        $login = $data['login'];
+        $senha = $data['senha'];
 
-    if ($stmt) {
-        // Vincula os parâmetros
-        $stmt->bind_param("ss", $login, $senha);
+        // Consulta SQL preparada
+        $query = "SELECT * FROM usuario WHERE login = ?";
 
-        // Executa a consulta
-        $stmt->execute();
+        // Prepara a consulta
+        $stmt = $conexao->prepare($query);
 
-        // Obtém o resultado da consulta
-        $result = $stmt->get_result();
+        if ($stmt) {
+            // Vincula o parâmetro
+            $stmt->bind_param("s", $login);
 
-        // Verifica se a consulta retornou alguma linha (ou seja, se as credenciais são válidas)
-        if ($result->num_rows > 0) {
-            $response = array('success' => true, 'message' => 'Login bem-sucedido');
+            // Executa a consulta
+            $stmt->execute();
+
+            // Obtém o resultado da consulta
+            $result = $stmt->get_result();
+
+            // Verifica se a consulta retornou alguma linha (ou seja, se o usuário existe)
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                $hash_senha_banco = $row['senha'];
+
+                // Verifique a senha usando password_verify
+                if (password_verify($senha, $hash_senha_banco)) {
+                    $response['success'] = true;
+                    $response['message'] = 'Login bem-sucedido';
+                } else {
+                    $response['success'] = false;
+                    $response['message'] = 'Senha incorreta';
+                }
+            } else {
+                $response['success'] = false;
+                $response['message'] = 'Usuário não encontrado';
+            }
+
+            // Fecha a consulta
+            $stmt->close();
         } else {
-            $response = array('success' => false, 'message' => 'Credenciais inválidas');
+            $response['success'] = false;
+            $response['message'] = 'Erro na consulta preparada';
         }
-
-        // Fecha a consulta
-        $stmt->close();
     } else {
-        $response = array('success' => false, 'message' => 'Erro na consulta preparada');
+        $response['success'] = false;
+        $response['message'] = 'JSON inválido na solicitação';
     }
-    
-    // Fecha a conexão com o banco de dados
-    $conexao->close();
 } else {
-    // Caso as credenciais não tenham sido fornecidas na solicitação
-    $response = array('success' => false, 'message' => 'Credenciais não fornecidas');
+    // Caso a solicitação não seja POST
+    $response['success'] = false;
+    $response['message'] = 'Método de solicitaçãoz inválido';
 }
+
+// Define o cabeçalho Content-Type como JSON
+header('Content-Type: application/json');
 
 // Retorna a resposta em JSON
 echo json_encode($response);
-
-
-?>
-
-
+?> 
