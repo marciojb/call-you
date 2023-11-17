@@ -4,12 +4,13 @@ document.getElementById("meuBotao").addEventListener("click", function (event) {
     // Realize uma solicitação AJAX para o seu script PHP de login
     const login = document.querySelector("#login").value;
     const senha = document.querySelector("#senha").value;
-    
 
-    if (login.trim() === '' || senha.trim() === '') {
-    console.log('Campos em branco. Preencha os campos de login e senha.');
-    return;
-}
+   
+
+    var elemento = document.getElementById("meuElemento");
+    elemento.style.visibility = "visible";
+    elemento.style.pointerEvents = "auto";
+
     fetch('../rotas/loginbd.php', {
         method: 'POST',
         body: JSON.stringify({ login, senha }),
@@ -24,22 +25,17 @@ document.getElementById("meuBotao").addEventListener("click", function (event) {
         return response.json(); // Trate a resposta como JSON
     })
     .then(data => {
-      console.log('Resposta do servidor:', data);
+        console.log('Resposta do servidor:', data);
+
         if (data.success === true) {
-            // O login foi bem-sucedido, execute as ações
+            // O login foi bem-sucedido, então adicione animações
             const imagem = document.querySelector(".mover");
             const input = document.querySelector(".esconder");
             const inputsenha = document.querySelector(".escondersenha");
-            var elemento = document.getElementById("meuElemento");
-            elemento.style.visibility = "visible";
-            elemento.style.pointerEvents = "auto";
-               
 
-            // Remove a propriedade 'animation: none;' para ativar as animações
             imagem.style.animation = "moverImagem 1s linear forwards";
             input.style.animation = "esconderInput 1s linear forwards";
             inputsenha.style.animation = "esconderInput 1s linear forwards";
-           
         } else {
             // O login não foi bem-sucedido, você pode tratar isso de acordo com sua necessidade
             console.log("Login falhou: " + data.message);

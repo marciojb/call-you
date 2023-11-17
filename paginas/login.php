@@ -33,16 +33,16 @@
         <form method="post" id="troca-senha" action="../rotas/troca_senha.php"> 
           <div class="escondersenha">
         <h2>Troca de Senha</h2>
-        <label for="cpf">CPF:</label>
-        <input type="text" name="cpf" placeholder="Digite o CPF" id="cpf">
-            <div id="campoSenha" class="escondersenha" style="display: none;">
+        <label for="cpf">CPF:</label><br>
+        <input type="text" name="cpf" placeholder="Digite o CPF" oninput="verificarCPF()" id="cpf">
+            <div id="campoSenha" class="escondersenha" style="display: none;" >
             <label for="nova_senha">Nova Senha:</label>
             <input type="password" name="nova_senha" id="nova_senha" placeholder="Digite a senha">
             <label for="confirma_senha">Confirma Senha:</label>
             <input type="password" name="confirma_senha" id="confirma_senha" placeholder="Confirme a senha">
           </div>
-           <a href="login.php">Voltar à área de login</a>
-        <button name="buttonSenha" id="buttonSenha" type="button" >Confirmar</button>
+           <a href="login.php">Voltar à área de login</a>   
+        <button  class="buttonSenha" id="troca-senha" type="submit" >Confirmar</button>
         <a href="cadastro.php">Não possui cadastro?</a>
             </form>
             <!--                               2fa                                                    -->
@@ -63,12 +63,10 @@
             <label for="pergunta3dataN">Qual é a data do seu nascimento?</label>
             <input type="date" name="pergunta3dataN" id="pergunta3dataN">
         </div>
-        <button  type="button" class="buttonEntrar" >comfirmar</button>
+        <button  type="button" id="confimar_login" type="submit" class="buttonEntrar" >comfirmar</button>
         <br><br><br>
     </div>
-</form>
-
-
+   </form>
         </div>
       </div>
       <div id="section2" class="mover">
@@ -79,13 +77,12 @@
    <!-- footer-->
    <?php require_once '../componentes/footer.php'; ?>
 </body>
-
-<script>
-
-</script>
+<script src="../script/2fa.js"></script>
+<script src="../script/perguntas_segurança.js"></script>
+<script src="../script/cpf_verificar.js"></script>
 <script src="../script/login.js"></script>
 <script src="../script/script.js"></script>
 <script src="../script/troca-senha.js"></script>
-<script src="../script/2fa.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </html>

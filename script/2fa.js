@@ -1,25 +1,37 @@
-var mostrarPerguntasButton = document.getElementsByName("mostrarPerguntas")[0];
-
-mostrarPerguntasButton.addEventListener("click", function() {
-    var div2fa = document.getElementById("fa");
-    var campos = ["pergunta1nomeM", "pergunta2CEP", "pergunta3dataN"];
-    var campoAleatorio = campos[Math.floor(Math.random() * campos.length)];
-
-    // Oculta todos os campos e seus rótulos
-    for (var i = 0; i < campos.length; i++) {
-        document.getElementById(campos[i]).style.display = "none";
-        var labelForCampo = document.querySelector('label[for="' + campos[i] + '"]');
-        if (labelForCampo) {
-            labelForCampo.style.display = "none";
+document.getElementById("confimar_login").addEventListener("submit", function (event) {
+    event.preventDefault();
+    const login = document.querySelector("#login").value;
+    const senha = document.querySelector("#senha").value;
+    const pergunta1nomeM = document.querySelector("#pergunta1nomeM").value;
+    const pergunta2CEP = document.querySelector("#pergunta2CEP").value;
+    const pergunta3dataN = document.querySelector("#pergunta3dataN").value;
+    
+    fetch('../rotas/2fa.php', {
+        method: 'POST',
+        body: JSON.stringify({ login,senha, pergunta1nomeM,pergunta2CEP,pergunta3dataN }),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erro na solicitação');
         }
-    }
+        return response.json(); // Trate a resposta como JSON
+    })
+    .then(data => {
+        // Manipule a resposta do servidor
+        console.log(data);
 
-    // Exibe o campo e seu rótulo aleatório
-    document.getElementById(campoAleatorio).style.display = "block";
-    var labelForCampoAleatorio = document.querySelector('label[for="' + campoAleatorio + '"]');
-    if (labelForCampoAleatorio) {
-        labelForCampoAleatorio.style.display = "block";
-    }
-
-    this.style.display = "none";
+        // Adicione lógica adicional aqui para lidar com a resposta
+        if (data.status === 'success') {
+            alert('login bem sucedido ');
+            
+        } else {
+            alert('login mal sucedido ' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Erro na solicitação AJAX:', error);
+    });
 });

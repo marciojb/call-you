@@ -174,7 +174,7 @@ footer {
   font-size: small;
 }
 
-#buttonSenha {
+.buttonSenha {
   border-radius: 15px;
   color: white;
   background-color: rgb(9, 33, 99);
@@ -189,7 +189,7 @@ footer {
   box-shadow: 0px 6px 6px 0px rgba(0, 0, 0, 0.61);
 }
 
-#buttonSenha:hover {
+.buttonSenha:hover {
   cursor: pointer;
 }
 
@@ -249,15 +249,15 @@ footer {
     width: 70%;
     
   }
-  #buttonSenha{
+  .buttonSenha{
     margin-left: 24%;
     margin-top: 100px;
   }
-  #troca-senha{
+  .troca-senha{
     margin-left: -35%;
    display: block;
   }
-  #troca-senha input{
+  .troca-senha input{
     width: 90%;
   }
   #troca-senha a{
