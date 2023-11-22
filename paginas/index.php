@@ -17,17 +17,14 @@
 
 
   <?php
-  $_SESSION['user_logged_in'] = true;
-  $response = array(
-      "status" => "success",
-      "message" => "Login existe e respostas às perguntas de segurança estão corretas. Sessão iniciada.",
-      "login" => $login  // Adiciona o login à resposta
-  );
-  
-  // Exibe o login como um echo
-  echo "Login bem-sucedido para o utilizador: " . $_SESSION['login'];
-  
-  
+  session_start();
+  if ( isset($_SESSION['id'])){
+    echo "Login bem-sucedido para o utilizador: " . $_SESSION['name'];
+
+  } else{
+    echo 'não logado';
+  }
+ 
   
   ?>
   <!-- carrocel -------------------------->

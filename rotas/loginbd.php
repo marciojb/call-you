@@ -4,7 +4,7 @@ session_start();
 // Verifique se a solicitação é um POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Inicialize o array de resposta
-    $response = array();
+    $response = array();    
 
     // Obtém o corpo da solicitação POST como um objeto JSON
     $json_data = file_get_contents('php://input');

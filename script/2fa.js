@@ -1,4 +1,4 @@
-document.querySelector("#confimar_login").addEventListener("submit", function (event) {
+document.querySelector("#confimar_login1").addEventListener("click", function (event) {
     console.log(event.target);
     event.preventDefault();
 
