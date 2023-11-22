@@ -1,71 +1,78 @@
 <?php
-// Iniciar ou retomar a sessão
 session_start();
 include_once('../config/config.php');
 
-// Verificar se a requisição é do tipo POST
+$response = array("status" => "error", "message" => "Erro desconhecido ao obter perguntas de segurança do banco de dados.");
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Obter dados da requisição (por exemplo, login e respostas às perguntas de segurança)
-    $login = $_POST['login'];
-    $resposta1 = $_POST['pergunta1nomeM'];
-    $resposta2 = $_POST['pergunta2CEP'];
-    $resposta3 = $_POST['pergunta3dataN'];
+    $json_data = file_get_contents('php://input');
+    $data = json_decode($json_data, true);
 
-    // Consultar o banco de dados para verificar o login e respostas às perguntas de segurança
-    $query = "SELECT * FROM usuario WHERE login = ?";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("s", $login);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    if (isset($_SESSION["login"])) {
+        $login = $_SESSION["login"];
 
-    if ($result->num_rows > 0) {
-        // O login existe
-        $userRow = $result->fetch_assoc();
-        $userId = $userRow['id'];
-
-        // Verificar se há perguntas de segurança associadas a esse login
-        $query = "SELECT * FROM perguntas_seguranca WHERE usuario_id = ?";
-        $stmt = $conn->prepare($query);
-        $stmt->bind_param("i", $userId);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        if ($result->num_rows > 0) {
-            // Existem perguntas de segurança associadas a esse login
-            $securityRow = $result->fetch_assoc();
-
-            // Verificar as respostas às perguntas de segurança
-            $resposta1_db = $securityRow['pergunta1nomeM'];
-            $resposta2_db = $securityRow['pergunta2CEP'];
-            $resposta3_db = $securityRow['pergunta3dataN'];
-
-            if ($resposta1 == $resposta1_db && $resposta2 == $resposta2_db && $resposta3 == $resposta3_db) {
-                // Respostas corretas
-                // Definir uma variável de sessão para marcar o login bem-sucedido
-                $_SESSION['user_logged_in'] = true;
-                $response = array("status" => "success", "message" => "Login existe e respostas às perguntas de segurança corretas. Sessão iniciada.");
-            } else {
-                // Respostas incorretas
-                $response = array("status" => "error", "message" => "Login existe, mas respostas às perguntas de segurança estão incorretas.");
-            }
+        // Verificando a conexão com o banco de dados
+        if (!$conexao) {
+            $response = array("status" => "error", "message" => "Erro na conexão com o banco de dados: " . mysqli_connect_error());
         } else {
-            // Não há perguntas de segurança associadas a esse login
-            $response = array("status" => "error", "message" => "Login existe, mas não há perguntas de segurança associadas.");
+            $query = "SELECT * FROM usuario WHERE login = ?";
+            $stmt = $conexao->prepare($query);
+            $stmt->bind_param("s", $login);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($result->num_rows > 0) {
+                $userRow = $result->fetch_assoc();
+                $userId = $userRow['id'];
+
+                $stmtSecurity = $conexao->prepare("SELECT * FROM perguntas_seguranca WHERE id = ?");
+                $stmtSecurity->bind_param("i", $userId);
+                $stmtSecurity->execute();
+                $resultSecurity = $stmtSecurity->get_result();
+
+                if ($resultSecurity->num_rows > 0) {
+                    $securityQuestions = $resultSecurity->fetch_all(MYSQLI_ASSOC);
+
+                    if (!empty($securityQuestions)) {
+                        $resposta1_db = $securityQuestions[0]['pergunta1nomeM'];
+                        $resposta2_db = $securityQuestions[0]['pergunta2CEP'];
+                        $resposta3_db = $securityQuestions[0]['pergunta3dataN'];
+
+                        if (
+                            isset($data['pergunta1nomeM']) &&
+                            isset($data['pergunta2CEP']) &&
+                            isset($data['pergunta3dataN']) &&
+                            $data['pergunta1nomeM'] == $resposta1_db &&
+                            $data['pergunta2CEP'] == $resposta2_db &&
+                            $data['pergunta3dataN'] == $resposta3_db
+                        ) {
+                            $_SESSION['user_logged_in'] = true;
+                            $response = array("status" => "success", "message" => "Login existe e respostas às perguntas de segurança estão corretas. Sessão iniciada.");
+                        } else {
+                            $response = array("status" => "error", "message" => "Respostas às perguntas de segurança estão incorretas.");
+                        }
+                    } else {
+                        $response = array("status" => "error", "message" => "Login existe, mas não há perguntas de segurança associadas.");
+                    }
+                } else {
+                    $response = array("status" => "error", "message" => "Erro ao obter perguntas de segurança do banco de dados: " . $stmtSecurity->error);
+                }
+            } else {
+                $response = array("status" => "error", "message" => "Login não encontrado.");
+            }
+
+            $stmtSecurity->close();
+            $stmt->close();
         }
     } else {
-        // O login não existe
-        $response = array("status" => "error", "message" => "Login não encontrado.");
+        $response = array("status" => "error", "message" => "Chave 'login' não está presente nos dados recebidos.");
     }
 } else {
-    // Se a requisição não for do tipo POST
     $response = array("status" => "error", "message" => "Método de requisição não suportado.");
 }
 
-// Fechar a conexão com o banco de dados
-$stmt->close();
-$conn->close();
+$conexao->close();
 
-// Enviar resposta em formato JSON
 header('Content-Type: application/json');
 echo json_encode($response);
 ?>

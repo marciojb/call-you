@@ -1,5 +1,6 @@
 <?php
 include_once('../config/config.php');
+session_start();
 // Verifique se a solicitação é um POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Inicialize o array de resposta
@@ -40,6 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if (password_verify($senha, $hash_senha_banco)) {
                     $response['success'] = true;
                     $response['message'] = 'Login bem-sucedido';
+                    $_SESSION["login"]= $login;
                 } else {
                     $response['success'] = false;
                     $response['message'] = 'Senha incorreta';

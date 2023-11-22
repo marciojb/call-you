@@ -1,14 +1,14 @@
 <?php
 include_once('../config/config.php');
 
-if ($conexao->connect_error) {
-    die("Erro na conexão com o banco de dados: " . $conexao->connect_error);
-}
-
+// Verifique se é uma solicitação POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Obtenha os dados do corpo da requisição
     $json_data = file_get_contents('php://input');
     $data = json_decode($json_data, true);
-      if(isset($data['cpf'], $data['nova_senha'])) {
+
+    // Verifique se os parâmetros necessários estão presentes
+    if (isset($data['cpf'], $data['nova_senha'])) {
         $cpf_digitado = $data['cpf'];
         $nova_senha = password_hash($data['nova_senha'], PASSWORD_DEFAULT); // Hash da nova senha
 
@@ -24,17 +24,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $atualizar_query = "UPDATE usuario SET senha = ? WHERE cpf = ?";
             $stmt2 = $conexao->prepare($atualizar_query);
             $stmt2->bind_param("ss", $nova_senha, $cpf_digitado);
+
             if ($stmt2->execute()) {
                 echo json_encode(["message" => "Senha atualizada com sucesso!", "status" => "success"]);
-                exit(); // Adicione esta linha para interromper a execução após enviar a resposta JSON
             } else {
                 echo json_encode(["message" => "Erro ao atualizar a senha: " . $stmt2->error, "status" => "error"]);
             }
         } else {
             echo json_encode(["message" => "CPF não encontrado no banco de dados. Não é possível atualizar a senha.", "status" => "error"]);
         }
-    } else {
-        echo json_encode(["message" => "Requisição inválida. Parâmetros ausentes.", "status" => "error"]);
-    }
-}
+
+        // Feche a conexão após a execução
+        $stmt->close();
+        $stmt2->close();
+    } }
 ?>

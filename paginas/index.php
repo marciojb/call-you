@@ -15,6 +15,21 @@
   <!-- header-->
   <?php require_once '../componentes/header.php'; ?>
 
+
+  <?php
+  $_SESSION['user_logged_in'] = true;
+  $response = array(
+      "status" => "success",
+      "message" => "Login existe e respostas às perguntas de segurança estão corretas. Sessão iniciada.",
+      "login" => $login  // Adiciona o login à resposta
+  );
+  
+  // Exibe o login como um echo
+  echo "Login bem-sucedido para o utilizador: " . $_SESSION['login'];
+  
+  
+  
+  ?>
   <!-- carrocel -------------------------->
   <main>
     <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
