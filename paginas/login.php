@@ -24,10 +24,14 @@
           <label for="login">login</label><br>
           <input type="text" id="login" name="login"><br><br>
           <label for="senha">Senha</label><br>
-          <input type="password" id="senha" name="senha"><br>
-          <a id="test" href="">Esqueci minha senha</a><br><br><br>
+          <input type="password" id="senha" name="senha"><br><br>
+          <div id="toggle">
+          <button id="toggleButton" class="indicator"  type="click" >Cliente</button>
+		      </div>
+          <a id="test" name="escoder_perfil" href="">Esqueci minha senha</a>
           <button id="meuBotao" class="buttonEntrar" name="mostrarPerguntas" type="submit">Entrar</button><br>
-          <a href="cadastro.php">Não possuo cadastro</a><br>
+          <a name="escoder_perfil" href="cadastro.php">Não possuo cadastro</a><br>
+          
         </form>
       </div>
       <!--                           troca senha                                                      -->
@@ -79,7 +83,7 @@
   <!-- footer-->
   <?php require_once '../componentes/footer.php'; ?>
 </body>
-<script src="../script/2fa.js"></script>
+
 <script src="../script/perguntas_segurança.js"></script>
 <script src="../script/cpf_verificar.js"></script>
 <script src="../script/login.js"></script>

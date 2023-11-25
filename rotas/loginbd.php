@@ -1,6 +1,7 @@
 <?php
 include_once('../config/config.php');
 session_start();
+
 // Verifique se a solicitação é um POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Inicialize o array de resposta
@@ -36,12 +37,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($result->num_rows > 0) {
                 $row = $result->fetch_assoc();
                 $hash_senha_banco = $row['senha'];
+                $perfil = $row['perfil'];
 
                 // Verifique a senha usando password_verify
                 if (password_verify($senha, $hash_senha_banco)) {
+                    $_SESSION["login"] = $login;
                     $response['success'] = true;
                     $response['message'] = 'Login bem-sucedido';
-                    $_SESSION["login"]= $login;
+                    $response['perfil'] = $perfil;
                 } else {
                     $response['success'] = false;
                     $response['message'] = 'Senha incorreta';
@@ -64,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } else {
     // Caso a solicitação não seja POST
     $response['success'] = false;
-    $response['message'] = 'Método de solicitaçãoz inválido';
+    $response['message'] = 'Método de solicitação inválido';
 }
 
 // Define o cabeçalho Content-Type como JSON
@@ -72,4 +75,4 @@ header('Content-Type: application/json');
 
 // Retorna a resposta em JSON
 echo json_encode($response);
-?> 
+?>

@@ -15,20 +15,20 @@ if(isset($_POST['submit'])) {
     $telefone_fixo = mysqli_real_escape_string($conexao, $_POST['telefone_fixo']);
     $cep = mysqli_real_escape_string($conexao, $_POST['cep']);
     $complemento = mysqli_real_escape_string($conexao, $_POST['complemento']);
-
+    $perfil = 'comum';
 
     $senha_hash = password_hash($senha, PASSWORD_DEFAULT);
     
     // Construa a consulta SQL corretamente usando prepared statements
-    $query = "INSERT INTO usuario (login, senha, nome, data_nascimento, cpf, nome_materno, sexo, telefone_cel, telefone_fixo, cep, complemento) 
-              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $query = "INSERT INTO usuario (login, senha, nome, data_nascimento, cpf, nome_materno, sexo, telefone_cel, telefone_fixo, cep, complemento,perfil) 
+              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
     
     // Prepare a consulta
     $stmt = mysqli_prepare($conexao, $query);
 
     if ($stmt) {
         // Associe os parâmetros e execute a consulta
-        mysqli_stmt_bind_param($stmt, "sssssssssss", $login, $senha_hash, $nome, $data_nascimento, $cpf, $nome_materno, $sexo, $telefone_celular, $telefone_fixo, $cep, $complemento);
+        mysqli_stmt_bind_param($stmt, "ssssssssssss", $login, $senha_hash, $nome, $data_nascimento, $cpf, $nome_materno, $sexo, $telefone_celular, $telefone_fixo, $cep, $complemento, $perfil);
         
         if (mysqli_stmt_execute($stmt)) {
             echo "Inserção bem-sucedida!";

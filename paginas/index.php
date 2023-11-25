@@ -16,17 +16,7 @@
   <?php require_once '../componentes/header.php'; ?>
 
 
-  <?php
-  session_start();
-  if ( isset($_SESSION['id'])){
-    echo "Login bem-sucedido para o utilizador: " . $_SESSION['name'];
-
-  } else{
-    echo 'não logado';
-  }
- 
   
-  ?>
   <!-- carrocel -------------------------->
   <main>
     <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
