@@ -55,10 +55,11 @@ document.getElementById("meuBotao").addEventListener("click", function (event) {
 
         if (perfilUsuario === 'master' && isMasterOnly) {
             // Se o perfil é "master" e o botão está configurado para permitir apenas "master", redirecione imediatamente
-            fetch('../function/login_maste.php', {
+            fetch('../function/login_maste.php', { 
                 method: 'GET',
                 credentials: 'include', // Inclui cookies na solicitação
             })
+            
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Erro na solicitação. Código de resposta: ' + response.status);
@@ -77,7 +78,7 @@ document.getElementById("meuBotao").addEventListener("click", function (event) {
 
             if (imagem && input && inputsenha) {
                 // Verifica se os elementos existem antes de tentar acessar suas propriedades
-                imagem.style.animation = "moverImagem 1s linear forwards";
+                imagem.style.animation = "moverImagem1 1s linear forwards";
                 input.style.animation = "esconderInput 1s linear forwards";
                 inputsenha.style.animation = "esconderInput 1s linear forwards";
 

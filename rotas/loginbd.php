@@ -59,6 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             $response['success'] = false;
             $response['message'] = 'Erro na consulta preparada';
+            header('location: ../paginas/error.php');
         }
     } else {
         $response['success'] = false;
@@ -68,6 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Caso a solicitação não seja POST
     $response['success'] = false;
     $response['message'] = 'Método de solicitação inválido';
+    header('location: ../paginas/index.php');
 }
 
 // Define o cabeçalho Content-Type como JSON

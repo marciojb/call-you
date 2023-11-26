@@ -32,15 +32,16 @@ if(isset($_POST['submit'])) {
         
         if (mysqli_stmt_execute($stmt)) {
             echo "Inserção bem-sucedida!";
+            header('location: ../paginas/login.php');
         } else {
             echo "Erro ao inserir dados: " . mysqli_error($conexao);
         }
         
         // Feche o statement
         mysqli_stmt_close($stmt);
-    } else {
+    }  else {
         echo "Erro na preparação da consulta: " . mysqli_error($conexao);
-    }
+    } 
 
     // Feche a conexão com o banco de dados
     mysqli_close($conexao);

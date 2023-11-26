@@ -31,5 +31,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Se o método de requisição não for POST, retorne uma resposta indicando um erro
     http_response_code(400);
     echo json_encode(['error' => 'Método de requisição inválido']);
+    header('location: ../paginas/index.php');
 }
 ?>

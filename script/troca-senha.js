@@ -7,7 +7,7 @@ document.getElementById("troca-senha-final").addEventListener("click", function 
 
     // Verificar se as senhas coincidem
     if (novaSenha !== confirmaSenha) {
-        alert('A senha não coincide. Por favor, verifique.');
+        Swal.fire("Erro", "A senha não coincide. Por favor, verifique.", "error");
         console.error('As senhas não coincidem.');
         return;
     }
@@ -32,8 +32,10 @@ document.getElementById("troca-senha-final").addEventListener("click", function 
 
             // Adicionar lógica adicional aqui para lidar com a resposta
             if (data.status === 'success') {
-                alert('Senha atualizada com sucesso!');
-                location.reload(); // Recarregar a página após a atualização bem-sucedida (opcional)
+                Swal.fire("Sucesso", "Senha atualizada com sucesso!", "success").then(() => {
+                    // Redirecionar após o alerta ser fechado
+                    window.location.href = "../paginas/index.php";
+                }); // Recarregar a página após a atualização bem-sucedida (opcional)
             } else {
                 alert('Erro ao atualizar a senha: ' + data.message);
             }

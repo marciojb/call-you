@@ -18,6 +18,7 @@ if (session_status() == PHP_SESSION_NONE) {
     </a>
     <ul class="dropdown-menu text-small shadow" data-popper-placement="bottom-end">
         <li><a class="dropdown-item text-black" href="../paginas/perfil.php">Perfil</a></li>
+        <li><a class="dropdown-item text-black" href="../paginas/troca_senha.php">alterar senha</a></li>
         <li>
             <hr class="dropdown-divider">
         </li>
@@ -45,7 +46,7 @@ if (session_status() == PHP_SESSION_NONE) {
                     <?php echo $_SESSION['name'] ?> 
                 </a>
                 <ul class="dropdown-menu text-small shadow" data-popper-placement="bottom-end">
-                    <li><a class="dropdown-item text-black" href="#">Perfil</a></li>
+                    <li><a class="dropdown-item text-black" href="../paginas/perfil.php">Perfil</a></li>
                     <li>
                         <hr class="dropdown-divider">
                     </li>

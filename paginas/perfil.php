@@ -57,70 +57,78 @@ $conexao->close();
 <body>
     <!-- header-->
     <?php require_once '../componentes/header.php'; ?>
-    <h1>Informações do Perfil</h1>
+    <div> <h1 id="perfil1" >Informações do Perfil</h1><br></div>
     <div id="perfil">
+       
 
-        <ul>
-            <div class="li_perfil">
-                <li><strong>Login:</strong>
-                    <?php echo $perfil['login']; ?>
-                </li>
-            </div>
-            <div class="li_perfil">
-                <li><strong>Nome:</strong>
-                    <?php echo $perfil['nome']; ?>
-                </li>
-            </div>
-            <div class="li_perfil">
-                <li><strong>Senha:</strong>
-                    <?php echo $perfil['senha']; ?>
-                </li>
-            </div>
-            <div class="li_perfil">
-                <li><strong>CPF:</strong>
-                    <?php echo $perfil['cpf']; ?>
-                </li>
-            </div>
-            <div class="li_perfil">
-                <li><strong>nome materno:</strong>
-                    <?php echo $perfil['nome_materno']; ?>
-                </li>
-            </div>
-            <div class="li_perfil">
-                <li><strong>CEP:</strong>
-                    <?php echo $perfil['cep']; ?>
-                </li>
-            </div>
-            <div class="li_perfil">
-                <li><strong>Data de Nascimento:</strong>
-                    <?php echo $perfil['data_nascimento']; ?>
-                </li>
-            </div>
-            <div class="li_perfil">
-                <li><strong>Sexo:</strong>
-                    <?php echo $perfil['sexo']; ?>
-                </li>
-            </div>
-            <div class="li_perfil">
-                <li><strong>Telefone Celular:</strong>
-                    <?php echo $perfil['telefone_cel']; ?>
-                </li>
-            </div>
-            <div class="li_perfil">
-                <li><strong>Telefone Fixo:</strong>
-                    <?php echo $perfil['telefone_fixo']; ?>
-                </li>
-            </div>
-            <div class="li_perfil">
-            <li><strong>Complemento:</strong>
+        <ul list-group>
+
+            <li class="list-group-item" ><strong>Login:</strong>
+                <?php echo $perfil['login']; ?>
+            </li>
+
+
+            <li class="list-group-item">><strong>Nome:</strong>
+                <?php echo $perfil['nome']; ?>
+            </li>
+
+
+            <li class="list-group-item">><strong>Senha:</strong>
+                <?php echo $perfil['senha']; ?>
+            </li>
+
+
+            <li class="list-group-item">><strong>CPF:</strong>
+                <?php echo $perfil['cpf']; ?>
+            </li>
+
+
+            <li class="list-group-item">><strong>nome materno:</strong>
+                <?php echo $perfil['nome_materno']; ?>
+            </li>
+
+
+            <li class="list-group-item">><strong>CEP:</strong>
+                <?php echo $perfil['cep']; ?>
+            </li>
+
+
+            <li class="list-group-item">><strong>Data de Nascimento:</strong>
+                <?php echo $perfil['data_nascimento']; ?>
+            </li>
+
+
+            <li class="list-group-item">><strong>Sexo:</strong>
+                <?php echo $perfil['sexo']; ?>
+            </li>
+
+
+            <li class="list-group-item">><strong>Telefone Celular:</strong>
+                <?php echo $perfil['telefone_cel']; ?>
+            </li>
+
+
+            <li class="list-group-item">><strong>Telefone Fixo:</strong>
+                <?php echo $perfil['telefone_fixo']; ?>
+            </li>
+            <li class="list-group-item">><strong>cep:</strong>
+                <?php echo $perfil['cep']; ?>
+            </li>
+            <li class="list-group-item">><strong>Complemento:</strong>
                 <?php echo $perfil['complemento']; ?>
             </li>
-    </div>
-    </ul>
-    </div>
+        
 
-    <a class="perfil_a" href="../function/logout.php">Sair</a>
-    <a class="perfil_a" href="../paginas/troca_senha.php"> Alterar Senha</a>
+            
+        </ul>
+
+        
+    <?php
+    ?>
+    </div>
+    <br><br>
+
+    
 
     <!-- Footer -->
     <?php require_once '../componentes/footer.php'; ?>

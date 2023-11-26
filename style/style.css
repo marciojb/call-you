@@ -5,7 +5,18 @@
 
   100% {
 
-    transform: translate(-93%);
+    transform: translate(-430px);
+
+  }
+}
+@keyframes moverImagem1 {
+  0% {
+    transform: translate(0);
+  }
+
+  100% {
+
+    transform: translate(-280px);
 
   }
 }
@@ -83,8 +94,8 @@ footer {
 
 #troca-senha {
   display: block;
-  margin-left: 20%;
-  margin-top: 1%;
+  margin-left: 50%;
+  margin-top: 40px;
   
 }
 #troca-senha1 {
@@ -99,7 +110,8 @@ footer {
   
 }
 #fa {
- margin-top: -90%;
+ margin-top: -100%;
+ margin-left: 70%;
   
   
 }
@@ -124,6 +136,8 @@ footer {
   display: block;
   justify-content: center;
   font-weight: 400;
+  margin-left: 50%;
+  
   text-decoration: underline;
 
 }
@@ -145,6 +159,7 @@ footer {
   justify-content: center;
   font-weight: 400;
   text-decoration: underline;
+  margin-left: 30%;
 
 }
 
@@ -160,6 +175,7 @@ footer {
   border-radius: 10px;
   height: 30px;
   border: solid 1px rgba(0, 0, 0, 0.479);
+  margin-left: 10px;
 }
 #troca-senha1 input {
   width: 50%;
@@ -177,9 +193,10 @@ footer {
 }
 
 #fa input {
-  width: 100%;
+  width: 250px;
   border-radius: 10px;
   height: 30px;
+  margin-left: 30%;
   border: solid 1px rgba(0, 0, 0, 0.479);
 }
 
@@ -210,6 +227,7 @@ footer {
 #fa a {
   margin-top: 10px;
   width: 100%;
+  margin-left: 40%;
   display: flex;
   justify-content: right;
   font-size: small;
@@ -270,12 +288,30 @@ footer {
   cursor: pointer;
 }
 
+.buttonEntrar1 {
+  border-radius: 15px;
+  color: white;
+  background-color: rgb(9, 33, 99);
+  font-size: large;
+  margin-left: 30%;
+  padding: 5px;
+  width: 150px;
+  height: 40px;
+  border: solid 1px rgba(0, 0, 0, 0.308);
+  margin-top: 35%;
+  margin-bottom: 5%;
+  box-shadow: 0px 6px 6px 0px rgba(0, 0, 0, 0.61);
+}
+
+.buttonEntrar1 :hover {
+  cursor: pointer;
+}
 
 #section2 {
   width: 60%;
   background-image: linear-gradient(rgb(28, 28, 153), rgb(88, 138, 214));
   border-radius: 10px 10px 10px 10px;
-  margin-left: -50%
+  margin-left: -40%
 }
 
 #section2 img {
@@ -299,14 +335,25 @@ footer {
   }
   #fa{ 
     display: block;
-    margin-left: -1%;
-    margin-top: -400px;
+    margin-left: -50px;
+    margin-top: -300px;
+    
     
   }
   #fa input{
     width: 70%;
     
   }
+  #fa h2 {
+    width: 95%;
+    color: rgb(49, 29, 136);
+    display: block;
+    justify-content: center;
+    font-weight: 400;
+    text-decoration: underline;
+  
+  }
+ 
   .buttonSenha{
     margin-left: 24%;
     margin-top: 100px;
@@ -319,18 +366,23 @@ footer {
     margin-left: 24%;
     margin-top: 100px;
   }
-  .troca-senha{
-    margin-left: -35%;
+  #troca-senha{
+    margin-left: -50%;
+    margin-top: 60px;
    display: block;
   }
-  .troca-senha input{
-    width: 90%;
+  #troca-senha input{
+    width: 75%;
   }
   #troca-senha a{
     margin-left: -20%;
   }
   .buttonEntrar {
-    margin-left: 50%;
+    margin-left: 85%;
+  }
+  .buttonEntrar1 {
+    margin-left: 7px;
+    margin-top: 10px;
   }
   #troca-senha1{
     display: block;
@@ -340,6 +392,7 @@ footer {
     margin-left: 1px;
     margin-right: 1px;
   }
+  
   
   
 }
@@ -480,10 +533,10 @@ footer {
   color: #227CCE !important;
 }
 #container_user td{
-  color: #78b1e6 !important;
+  color: #173c99 !important;
 }
 #container_user td a{
-  color: #78b1e6 !important;
+  color: #173c99 !important;
   text-decoration: none;
 }
 
@@ -529,28 +582,42 @@ footer {
 
 /*--------------------------------------------- perfil -------------*/
 #perfil{
-margin-top: 0px;
+margin-top: 10px;
+border-radius: 10px;
+background-color: rgb(232, 234, 240);
+box-shadow: 2px 6px 6px 2px rgba(0, 0, 0, 0.61);
+width: 50%;
+height: 100%;
+margin-left: 20%;
+display: flex;
+}
+#perfil1{
+  margin-top: 10px;
+  border-radius: 10px;
+  background-color: rgb(232, 234, 240);
+  box-shadow: 2px 6px 6px 2px rgba(0, 0, 0, 0.61);
+  width: 30%;
+ 
+  margin-left: 30%;
+  
+  }
+
+
+#perfil h1{
+  margin-left: 40%;
 }
 
-.li_perfil{
-  width: 50%;
-  padding: 5px;
-  
-}
 #perfil li{
   display: flex;
-  border-radius: 5px;
-  color: #ffffff;
-  margin-top: 5px;
-  margin-left: 10px;
+
+  color: #000000;
+  margin-top: 10px;
   
-  background-color: rgb(9, 33, 99);
-  display: flex;
 }
- .perfil_a{
+ #perfil a{
   margin-top: 10px;
   width: 100%;
-  display: flex;
+  
   justify-content: left;
   margin-left: 10px;
  }
@@ -598,4 +665,60 @@ margin-top: 0px;
 }
 #toggle button{
   color: #FFF;
+}
+
+
+/*--------------------------------------------- Consulta de usuários -------------*/
+
+.Consulta_user{
+
+  margin-top: 30px;
+
+}
+
+
+
+.trash-icon {
+  color: #78b1e6;
+  transition: color 0.5s;
+}
+
+.trash-icon:hover {
+  color: red;
+}
+.trash-icon1 {
+  color: #78b1e6;
+  transition: color 0.5s;
+}
+
+.trash-icon1:hover {
+  color: rgb(16, 255, 8);
+}
+
+.box-search{
+  margin-top: 10px;
+  display: flex;
+  width: 500px;
+  margin-left: 87%;
+  margin-right: 20%;
+}
+@media(max-width:750px){
+  .box-search {
+    margin-left: 70%;
+    margin-right: 40%;
+  }
+}
+
+/*--------------------------------------------- detalhe-------------*/
+.detalhe_h1{
+  margin-left: 35%;
+}
+
+.validv {
+  margin-left: 10px;
+  color: green;
+}
+.validf {
+  margin-left: 10px;
+  color: rgb(255, 0, 0);
 }
