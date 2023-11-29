@@ -4,6 +4,7 @@ include_once('../config/config.php');
 // Verifique se é uma solicitação POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Obtenha os dados do corpo da requisição
+    
     $json_data = file_get_contents('php://input');
     $data = json_decode($json_data, true);
 
@@ -31,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo json_encode(["message" => "Erro ao atualizar a senha: " . $stmt2->error, "status" => "error"]);
             }
         } else {
-            echo json_encode(["message" => "CPF não encontrado no banco de dados. Não é possível atualizar a senha.", "status" => "error"]);
+            echo json_encode(["message" => "CPF não encontrado. Verifique o CPF e tente novamente.", "status" => "error"]);
         }
 
         // Feche a conexão após a execução

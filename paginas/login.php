@@ -10,6 +10,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
   <title>login</title>
 </head>
 
@@ -41,13 +42,13 @@
           <form method="post" id="troca-senha" action="../rotas/troca_senha.php">
             <div class="escondersenha">
               <h2>Troca de Senha</h2>
-              <label for="cpf">CPF:</label><br>
-              <input type="text" name="cpf" placeholder="Digite o CPF" oninput="verificarCPF()" id="cpf">
+              <label for="">CPF:</label><br>
+              <input type="text" name="cpf" placeholder="Digite o CPF" minlength="14" maxlength="14" oninput="verificarCPF()" id="cpf">
               <div id="campoSenha" class="escondersenha" style="display: none;">
                 <label for="nova_senha">Nova Senha:</label><br>
-                <input type="password" name="nova_senha" id="nova_senha" placeholder="Digite a senha">
+                <input type="password" name="nova_senha" id="nova_senha" minlength="8" maxlength="8" placeholder="Digite a senha">
                 <label for="confirma_senha">Confirma Senha:</label>
-                <input type="password" name="confirma_senha" id="confirma_senha" placeholder="Confirme a senha">
+                <input type="password" name="confirma_senha" minlength="8" maxlength="8" id="confirma_senha" placeholder="Confirme a senha">
               </div>
               <a href="login.php">Voltar à área de login</a>
               <button class="buttonSenha" id="troca-senha-final" type="submit">Confirmar</button>
@@ -85,8 +86,11 @@
   <?php require_once '../componentes/footer.php'; ?>
 </body>
 <script>
-  $(document).ready(function () {
+$(document).ready(function () {
     $("#pergunta2CEP").mask("99999-999");
+});
+$(document).ready(function () {
+    $("#cpf").mask("999.999.999-99");
 });
 
 </script>

@@ -21,16 +21,14 @@ function validateNome() {
     var nomeMessage = document.getElementById('nomeMessage');
 
     // Limpar o campo removendo qualquer caractere que não seja uma letra
-    nomeValue.value = nomeInput.value.replace(/[^a-zA-Z]/g, '');
-
-    
+    var nomeValue = nomeInput.value.replace(/[^a-zA-Z]/g, '');
 
     // Verificar se o nome tem entre 15 e 60 caracteres
     if (/^[a-zA-Z]{15,60}$/.test(nomeValue)) {
         nomeMessage.innerHTML = 'Nome válido!';
         nomeMessage.className = 'validv';
     } else {
-        nomeMessage.innerHTML = 'Nome:';
+        nomeMessage.innerHTML = 'Nome inválido!';
         nomeMessage.className = 'validf';
     }
 }
@@ -51,11 +49,7 @@ function validatemae() {
         maeMessage.className = 'validf';
     }
 }
-
-
-
-
-//////////senha////////////////////
+///////////////////senha////////////////////
 function validaSenha() {
     var senhaInput = document.getElementById('senha');
     var confirmar = document.getElementById('confirmar');
@@ -74,14 +68,14 @@ function validaSenha() {
     } else {
         senhaMessage.innerHTML = 'Senhas:';
         senhaMessage.className = 'validf';
-        senhaMessage1.innerHTML = 'Senhas não batem:';
+        senhaMessage1.innerHTML = 'Senhas não batem ou tem numero:';
         senhaMessage1.className = 'validf';
     }
 }
 
 ////////////////////////cpf////////////////////////
 
- $(document).ready(function () {
+$(document).ready(function () {
     $("#cpf").mask("999.999.999-99");
 });
 
@@ -320,9 +314,23 @@ function validateSexo() {
     }
 }
 
-function JSalert(){
-
-    swal("Congrats!", ", Your account is created!", "success");
-    
-    }
+// Função para limpar os campos do formulário////
+function limparFormulario() {
+    document.getElementById('login').value = '';
+    document.getElementById('nome').value = '';
+    document.getElementById('data_nascimento').value = '';
+    document.getElementById('nome_materno').value = '';
+    document.getElementById('telefone_celular').value = '';
+    document.getElementById('cep').value = '';
+    document.getElementById('senha').value = '';
+    document.getElementById('confirmar').value = '';
+    document.getElementById('cpf').value = '';
+    document.getElementById('sexo').value = 'nenhum';
+    document.getElementById('telefone_fixo').value = '';
+    document.getElementById('rua').value = '';
+    document.getElementById('bairro').value = '';
+    document.getElementById('cidade').value = '';
+    document.getElementById('complemento').value = '';
+    // Adicione mais campos conforme necessário
+}
 

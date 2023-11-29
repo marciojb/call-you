@@ -50,10 +50,12 @@ document.getElementById("meuBotao").addEventListener("click", function (event) {
             // Limpa os campos de login
             document.querySelector("#login").value = "";
             document.querySelector("#senha").value = "";
+            
             return;
         }
 
         if (perfilUsuario === 'master' && isMasterOnly) {
+            Swal.fire("Sucesso", "Logado com sucesso   ", "success").then(() => {
             // Se o perfil é "master" e o botão está configurado para permitir apenas "master", redirecione imediatamente
             fetch('../function/login_maste.php', { 
                 method: 'GET',
@@ -66,15 +68,20 @@ document.getElementById("meuBotao").addEventListener("click", function (event) {
                 }
                 // Continue com o redirecionamento após a sessão ser iniciada
                 window.location.href = '../paginas/index.php';
-            })
+            })})
             .catch(error => {
                 console.error('Erro no redirecionamento após iniciar a sessão:', error);
             });
         } else if (perfilUsuario === 'comum') {
             // Se o perfil é "comum", inicie as animações
+            Swal.fire("Sucesso", "Logado com sucesso   ", "success").then(() => {
+                // Redirecionar após o alerta ser fechado
+                
+            
             const imagem = document.querySelector(".mover");
             const input = document.querySelector(".esconder");
             const inputsenha = document.querySelector(".escondersenha");
+                 
 
             if (imagem && input && inputsenha) {
                 // Verifica se os elementos existem antes de tentar acessar suas propriedades
@@ -90,7 +97,7 @@ document.getElementById("meuBotao").addEventListener("click", function (event) {
                 }
             } else {
                 console.log('Elementos não encontrados para iniciar animações.');
-            }
+            }})
         } else {
             // Perfil desconhecido, faça o que for necessário
             console.log('Perfil desconhecido ou não fornecido pelo servidor:', perfilUsuario);
